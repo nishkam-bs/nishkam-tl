@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>T&L Excellence Programme — Nishkam School West London</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--cream:#f2ece0;--cream2:#ede6d4;--white:#faf7f2;--navy:#0f1f33;--navy2:#162840;--gold:#b8862a;--gold2:#d4a84b;--text:#1a2a3a;--muted:#5c6e82;--border:#ddd3be;--r:6px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
+strong{font-weight:600;}
+img{display:block;max-width:100%;}
+
+header{position:sticky;top:0;z-index:100;background:var(--navy);height:58px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;}
+@media(min-width:700px){header{padding:0 72px;}}
+.hdr-brand{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;}
+.hdr-back{font-size:12px;color:rgba(255,255,255,.6);transition:color .15s;}
+.hdr-back:hover{color:#fff;}
+.hamburger{display:none;flex-direction:column;gap:5px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:4px;padding:8px 10px;cursor:pointer;}
+.hamburger span{display:block;width:18px;height:2px;background:#fff;border-radius:2px;}
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;}
+#overlay.on{display:block;}
+#drawer{position:fixed;top:0;right:0;width:272px;height:100vh;background:var(--navy);overflow-y:auto;z-index:200;transform:translateX(100%);transition:transform .28s ease;padding:20px 0 40px;}
+#drawer.on{transform:translateX(0);}
+.d-close{display:block;text-align:right;padding:0 20px 20px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;}
+.d-group{padding:0 20px;margin-bottom:22px;}
+.d-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:8px;}
+.d-group a{display:block;padding:6px 0;font-size:13px;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.06);transition:color .15s;}
+.d-group a:last-child{border-bottom:none;}
+.d-group a:hover{color:#fff;}
+
+.sec{padding:72px 28px;}
+@media(min-width:700px){.sec{padding:88px 72px;}}
+.sec.dark{background:var(--navy);color:#fff;}
+hr.rule{border:none;border-top:1px solid var(--border);margin:0 28px;}
+@media(min-width:700px){hr.rule{margin:0 72px;}}
+.eyebrow{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--gold);margin-bottom:6px;}
+.sh{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:14px;}
+.ssub{font-size:15px;color:var(--muted);line-height:1.72;max-width:620px;margin-bottom:48px;}
+
+.gate-overlay{position:fixed;inset:0;z-index:500;background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-align:center;}
+.gate-overlay.hidden{display:none;}
+.gate-banner{width:100%;background:var(--navy);padding:36px 28px 32px;margin-bottom:40px;}
+.gb-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:8px;}
+.gate-banner h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,34px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:8px;}
+.gate-banner h1 em{color:var(--gold2);font-style:italic;}
+.gate-banner .gb-sub{font-size:13px;color:rgba(255,255,255,.5);max-width:420px;margin:0 auto;}
+.gate-body{display:flex;flex-direction:column;align-items:center;gap:16px;padding:0 28px;}
+.gate-body h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--navy);}
+.gate-body .gate-sub{font-size:14px;color:var(--muted);max-width:320px;}
+.gate-body input{width:100%;max-width:280px;padding:12px 16px;border:2px solid var(--border);border-radius:var(--r);font-size:16px;font-family:'DM Sans',sans-serif;background:var(--white);outline:none;text-align:center;transition:border-color .2s;}
+.gate-body input:focus{border-color:var(--gold);}
+.gate-body button{width:100%;max-width:280px;padding:13px;background:var(--navy);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .2s;}
+.gate-body button:hover{background:var(--navy2);}
+.gate-err{color:#c0392b;font-size:12.5px;display:none;}
+.gate-body .back-link{font-size:12px;color:var(--muted);margin-top:8px;transition:color .15s;}
+.gate-body .back-link:hover{color:var(--gold);}
+
+.prog-hero{background:var(--navy);padding:56px 28px 60px;}
+@media(min-width:700px){.prog-hero{padding:72px 72px 76px;}}
+.prog-hero .eyebrow{color:var(--gold2);}
+.prog-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:14px;}
+.prog-hero h1 em{color:var(--gold2);font-style:italic;}
+.prog-hero .hero-sub{font-size:16px;color:rgba(255,255,255,.65);line-height:1.7;max-width:580px;margin-bottom:28px;}
+.prog-meta-row{display:flex;gap:24px;flex-wrap:wrap;}
+.pm-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5);}
+.pm-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+
+.session-card{background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden;transition:border-color .2s,transform .15s;}
+.session-card:hover{border-color:rgba(184,134,42,.5);transform:translateY(-2px);}
+.sc-inner{display:grid;grid-template-columns:80px 1fr;}
+@media(max-width:600px){.sc-inner{grid-template-columns:60px 1fr;}}
+.sc-num{background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold2);}
+.sc-body{padding:24px 28px;}
+.sc-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.sc-summary{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:12px;}
+.sc-aims{margin-bottom:14px;}
+.sc-aims .aim{font-size:12.5px;color:var(--text);padding:3px 0 3px 16px;position:relative;}
+.sc-aims .aim::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700;}
+.sc-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.stag{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;background:rgba(184,134,42,.1);color:var(--gold);border-radius:3px;}
+.sc-resources{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.res-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--navy);padding:6px 14px;background:rgba(15,31,51,.06);border-radius:var(--r);transition:background .15s,color .15s;}
+.res-link:hover{background:var(--navy);color:#fff;}
+
+.tool-list{display:flex;flex-direction:column;gap:0;}
+.tool-item{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer;transition:opacity .15s;}
+.tool-item:last-child{border-bottom:none;}
+.tool-item:hover{opacity:.8;}
+.ti-cat{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.ti-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;margin-bottom:4px;}
+.ti-body{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;}
+.ti-arrow{color:var(--gold);font-size:16px;flex-shrink:0;margin-top:4px;}
+
+.tool-modal{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.55);justify-content:center;align-items:center;padding:20px;}
+.tool-modal.open{display:flex;}
+.tm-inner{background:var(--cream);border-radius:12px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;}
+.tm-header{background:var(--navy);padding:24px 28px;border-radius:12px 12px 0 0;display:flex;align-items:flex-start;justify-content:space-between;}
+.tm-header h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;}
+.tm-close{background:none;border:none;color:rgba(255,255,255,.6);font-size:22px;cursor:pointer;}
+.tm-close:hover{color:#fff;}
+.tm-body{padding:28px;}
+.tm-body label{display:block;font-size:12px;font-weight:600;color:var(--navy);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;margin-top:18px;}
+.tm-body label:first-child{margin-top:0;}
+.tm-body textarea,.tm-body input[type="text"]{width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:var(--r);font-size:14px;font-family:'DM Sans',sans-serif;background:var(--white);outline:none;resize:vertical;transition:border-color .2s;}
+.tm-body textarea:focus,.tm-body input[type="text"]:focus{border-color:var(--gold);}
+.tm-body textarea{min-height:100px;}
+.tm-submit{margin-top:24px;width:100%;padding:13px;background:var(--navy);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .2s;}
+.tm-submit:hover{background:var(--navy2);}
+.tm-submit:disabled{opacity:.5;cursor:wait;}
+.tm-result{margin-top:24px;padding:20px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);font-size:14px;color:var(--text);line-height:1.7;white-space:pre-wrap;display:none;}
+.tm-result.show{display:block;}
+
+footer{background:var(--navy);padding:0;}
+.footer-logos{display:flex;align-items:center;justify-content:center;gap:48px;padding:40px 28px;border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap;}
+.footer-logos img{height:52px;width:auto;opacity:.85;}
+@media(min-width:700px){.footer-logos{padding:48px 72px;gap:72px;}.footer-logos img{height:60px;}}
+.footer-text{padding:36px 28px 32px;}
+@media(min-width:700px){.footer-text{padding:36px 72px 32px;}}
+.f-name{font-family:'Playfair Display',serif;font-size:16px;color:#fff;margin-bottom:5px;}
+.f-motto{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-style:italic;color:rgba(255,255,255,.35);margin-bottom:14px;}
+.f-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.7;max-width:340px;margin-bottom:28px;}
+.f-links{display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:28px;}
+.f-links a{font-size:12px;color:rgba(255,255,255,.4);transition:color .15s;}
+.f-links a:hover{color:#fff;}
+.f-copy{font-size:11px;color:rgba(255,255,255,.22);border-top:1px solid rgba(255,255,255,.08);padding-top:18px;}
+</style>
+</head>
+<body>
+
+<div class="gate-overlay" id="gate">
+  <div class="gate-banner"><div class="gb-eyebrow">Nishkam School West London · Programme 1 of 2</div><h1>T&amp;L <em>Excellence</em> Programme</h1><p class="gb-sub">Embedding consistent, inclusive classroom practice to improve behaviour, learning, and outcomes for all pupils.</p></div>
+  <div class="gate-body"><h2>Staff Access Only</h2><p class="gate-sub">Enter the password to access CPD session materials.</p><input type="password" id="pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')unlock()"/><button onclick="unlock()">Unlock</button><div class="gate-err" id="err">Incorrect password — please try again.</div><a href="index.html" class="back-link">← Back to home</a></div>
+</div>
+
+<header><a href="index.html" class="hdr-back">← Home</a><div class="hdr-brand">T&amp;L Excellence Programme</div><button class="hamburger" id="hamBtn"><span></span><span></span><span></span></button></header>
+
+<div id="overlay"></div>
+<nav id="drawer"><button class="d-close" id="drawerClose">✕</button><div class="d-group"><div class="d-label">Navigation</div><a href="index.html">← Home</a><a href="mlt-programme.html">Middle Leadership Programme</a></div><div class="d-group"><div class="d-label">Sessions</div><a href="#s1">01 · Behaviour for Learning</a><a href="#s2">02 · Explaining &amp; Modelling</a><a href="#s3">03 · Checking for Understanding</a><a href="#s4">04 · Questioning</a><a href="#s5">05 · Probing Questions</a><a href="#s6">06 · SEND &amp; Adaptive Teaching</a><a href="#s7">07 · Embedding Practice</a><a href="#s8">08 · Review &amp; Impact</a></div><div class="d-group"><div class="d-label">AI Tools</div><a href="#tools">Lesson Audit</a><a href="#tools">I Do / We Do / You Do</a><a href="#tools">Cold Call Questions</a><a href="#tools">Exit Tickets</a><a href="#tools">SEND Scaffolds</a></div></nav>
+
+<section class="prog-hero"><div class="eyebrow">Programme 1 of 2</div><h1>T&amp;L <em>Excellence</em> Programme</h1><p class="hero-sub">Embedding consistent, inclusive classroom practice to improve behaviour, learning, and outcomes for all pupils.</p><div class="prog-meta-row"><div class="pm-item"><div class="pm-dot"></div>All teaching staff</div><div class="pm-item"><div class="pm-dot"></div>8 sessions · 60–75 mins each</div><div class="pm-item"><div class="pm-dot"></div>Interactive CPD</div></div></section>
+
+<section class="sec" id="sessions">
+  <div class="eyebrow">Sessions</div><h2 class="sh">Programme Overview</h2><p class="ssub">Each session includes a CPD presentation, facilitator-led activities, self-directed reflection, and an implementation plan.</p>
+
+  <div class="session-card" id="s1"><div class="sc-inner"><div class="sc-num">01</div><div class="sc-body"><div class="sc-title">Behaviour for Learning</div><div class="sc-summary">Establishing calm, purposeful classrooms through consistent routines, clear expectations, and strong lesson starts and endings. Introduces the Four Pillars of BFL — Environment, Routine, Relationship, and Consistency.</div><div class="sc-aims"><div class="aim">Secure calm and purposeful learning environments</div><div class="aim">Embed consistent routines for entry, instruction, and transitions</div><div class="aim">Ensure first-time compliance and strong lesson starts and endings</div></div><div class="sc-tags"><span class="stag">Routines</span><span class="stag">Entry &amp; Exit</span><span class="stag">Compliance</span><span class="stag">Four Pillars</span></div><div class="sc-resources"><a href="BFL_Session1.pptx" class="res-link" download>CPD Presentation</a></div></div></div></div>
+  <div class="session-card" id="s2"><div class="sc-inner"><div class="sc-num">02</div><div class="sc-body"><div class="sc-title">Explaining &amp; Modelling</div><div class="sc-summary">Developing clarity in teaching by making thinking visible. Unpacks the I Do, We Do, You Do framework — modelling thinking step by step so pupils move confidently toward independent practice.</div><div class="sc-aims"><div class="aim">Use I Do, We Do, You Do to structure learning</div><div class="aim">Model thinking step by step with precision</div><div class="aim">Support pupils toward independent practice</div></div><div class="sc-tags"><span class="stag">I Do We Do You Do</span><span class="stag">Modelling</span><span class="stag">Clarity</span></div><div class="sc-resources"><span class="res-link" style="opacity:.4;cursor:default;">Coming soon</span></div></div></div></div>
+  <div class="session-card" id="s3"><div class="sc-inner"><div class="sc-num">03</div><div class="sc-body"><div class="sc-title">Checking for Understanding</div><div class="sc-summary">Using real-time assessment to identify learning and adapt teaching responsively. Mini-whiteboards, hinge questions, monitoring hesitation, and explicit vocabulary teaching.</div><div class="sc-aims"><div class="aim">Use mini-whiteboards and quick checks to assess all pupils</div><div class="aim">Monitor hesitation and misconceptions in real time</div><div class="aim">Teach and revisit key vocabulary explicitly</div></div><div class="sc-tags"><span class="stag">Whiteboards</span><span class="stag">AFL</span><span class="stag">Vocabulary</span><span class="stag">Misconceptions</span></div><div class="sc-resources"><span class="res-link" style="opacity:.4;cursor:default;">Coming soon</span></div></div></div></div>
+  <div class="session-card" id="s4"><div class="sc-inner"><div class="sc-num">04</div><div class="sc-body"><div class="sc-title">Questioning</div><div class="sc-summary">Strengthening classroom dialogue through structured questioning. Cold calling, Think Pair Share — ensuring every pupil is thinking, not just those with hands up.</div><div class="sc-aims"><div class="aim">Ask purposeful questions to the whole class</div><div class="aim">Use cold calling to promote accountability and inclusion</div><div class="aim">Structure Think, Pair, Share to deepen understanding</div></div><div class="sc-tags"><span class="stag">Cold Calling</span><span class="stag">Think Pair Share</span><span class="stag">Inclusion</span></div><div class="sc-resources"><span class="res-link" style="opacity:.4;cursor:default;">Coming soon</span></div></div></div></div>
+  <div class="session-card" id="s5"><div class="sc-inner"><div class="sc-num">05</div><div class="sc-body"><div class="sc-title">Probing Questions</div><div class="sc-summary">Extending thinking through follow-up questioning. Clarify, justify, extend — distributing cognitive work across the class and surfacing misconceptions through dialogue.</div><div class="sc-aims"><div class="aim">Use probing questions to clarify, justify, and extend thinking</div><div class="aim">Distribute thinking across the class</div><div class="aim">Identify and address misconceptions through dialogue</div></div><div class="sc-tags"><span class="stag">Probing</span><span class="stag">Misconceptions</span><span class="stag">Dialogue</span></div><div class="sc-resources"><span class="res-link" style="opacity:.4;cursor:default;">Coming soon</span></div></div></div></div>
+  <div class="session-card" id="s6"><div class="sc-inner"><div class="sc-num">06</div><div class="sc-body"><div class="sc-title">SEND Support &amp; Adaptive Teaching</div><div class="sc-summary">Ensuring inclusive classrooms through adaptive teaching, effective deployment of additional adults, and interventions that promote pupil independence.</div><div class="sc-aims"><div class="aim">Adapt teaching to meet diverse learning needs</div><div class="aim">Deploy additional adults effectively</div><div class="aim">Deliver interventions that promote independence</div></div><div class="sc-tags"><span class="stag">SEND</span><span class="stag">Adaptive Teaching</span><span class="stag">Independence</span></div><div class="sc-resources"><span class="res-link" style="opacity:.4;cursor:default;">Coming soon</span></div></div></div></div>
+  <div class="session-card" id="s7"><div class="sc-inner"><div class="sc-num">07</div><div class="sc-body"><div class="sc-title">Embedding &amp; Refining Practice</div><div class="sc-summary">Consolidating key strategies through structured reflection, coaching conversations, and sharing effective practice across the school.</div><div class="sc-aims"><div class="aim">Reflect on impact and refine classroom practice</div><div class="aim">Strengthen consistency across classrooms</div><div class="aim">Share effective strategies and solutions</div></div><div class="sc-tags"><span class="stag">Reflection</span><span class="stag">Coaching</span><span class="stag">Consistency</span></div><div class="sc-resources"><span class="res-link" style="opacity:.4;cursor:default;">Coming soon</span></div></div></div></div>
+  <div class="session-card" id="s8"><div class="sc-inner"><div class="sc-num">08</div><div class="sc-body"><div class="sc-title">Review &amp; Impact</div><div class="sc-summary">Evaluating programme impact and setting clear next steps. Progress against teaching standards, identifying strengths and priorities, sustaining practice.</div><div class="sc-aims"><div class="aim">Review progress against agreed teaching standards</div><div class="aim">Identify strengths and priorities for development</div><div class="aim">Agree next steps to embed and sustain practice</div></div><div class="sc-tags"><span class="stag">Review</span><span class="stag">Impact</span><span class="stag">Next Steps</span></div><div class="sc-resources"><span class="res-link" style="opacity:.4;cursor:default;">Coming soon</span></div></div></div></div>
+</section>
+
+<hr class="rule"/>
+
+<section class="sec dark" id="tools">
+  <div class="eyebrow" style="color:var(--gold2);">AI-Powered Tools</div><h2 class="sh" style="color:#fff;">Classroom Tools</h2><p class="ssub" style="color:rgba(255,255,255,.55);">AI-powered resources linked to the programme sessions. Enter your topic and get classroom-ready materials.</p>
+  <div class="tool-list">
+    <div class="tool-item" onclick="openTool('audit')"><div><div class="ti-cat">Sessions 1–8</div><div class="ti-title">Lesson Audit Tool</div><div class="ti-body">Paste or describe a lesson plan. Get it audited against the 8 T&amp;L strands with specific improvement suggestions.</div></div><div class="ti-arrow">→</div></div>
+    <div class="tool-item" onclick="openTool('idwdyd')"><div><div class="ti-cat">Session 2</div><div class="ti-title">I Do / We Do / You Do Builder</div><div class="ti-body">Enter a topic and year group. Get a fully sequenced explanation with modelled thinking scripted step by step.</div></div><div class="ti-arrow">→</div></div>
+    <div class="tool-item" onclick="openTool('coldcall')"><div><div class="ti-cat">Sessions 4 &amp; 5</div><div class="ti-title">Cold Call Question Bank</div><div class="ti-body">Enter a topic. Get a tiered bank of cold-call questions — recall, application, probing — with follow-up probes.</div></div><div class="ti-arrow">→</div></div>
+    <div class="tool-item" onclick="openTool('exit')"><div><div class="ti-cat">Session 3</div><div class="ti-title">Exit Ticket &amp; Whiteboard Prompts</div><div class="ti-body">Enter a topic. Get hinge questions, true/false checks, and sentence starters for misconception spotting.</div></div><div class="ti-arrow">→</div></div>
+    <div class="tool-item" onclick="openTool('send')"><div><div class="ti-cat">Session 6</div><div class="ti-title">SEND Scaffold Builder</div><div class="ti-body">Describe a task. Get adapted versions with scaffolds for different need types — visual prompts, sentence frames, chunk-and-check.</div></div><div class="ti-arrow">→</div></div>
+  </div>
+</section>
+
+<div class="tool-modal" id="modal-audit"><div class="tm-inner"><div class="tm-header"><h3>Lesson Audit Tool</h3><button class="tm-close" onclick="closeTool('audit')">✕</button></div><div class="tm-body"><label>Paste or describe your lesson plan</label><textarea id="audit-input" placeholder="Paste your lesson plan here, or describe the lesson — topic, structure, activities, timings..."></textarea><label>Subject &amp; Year Group</label><input type="text" id="audit-subject" placeholder="e.g. Year 9 Science — Forces"/><button class="tm-submit" id="audit-btn" onclick="runTool('audit')">Audit my lesson</button><div class="tm-result" id="audit-result"></div></div></div></div>
+<div class="tool-modal" id="modal-idwdyd"><div class="tm-inner"><div class="tm-header"><h3>I Do / We Do / You Do Builder</h3><button class="tm-close" onclick="closeTool('idwdyd')">✕</button></div><div class="tm-body"><label>Topic</label><input type="text" id="idwdyd-topic" placeholder="e.g. Adding fractions with different denominators"/><label>Year Group</label><input type="text" id="idwdyd-year" placeholder="e.g. Year 7"/><button class="tm-submit" id="idwdyd-btn" onclick="runTool('idwdyd')">Build sequence</button><div class="tm-result" id="idwdyd-result"></div></div></div></div>
+<div class="tool-modal" id="modal-coldcall"><div class="tm-inner"><div class="tm-header"><h3>Cold Call Question Bank</h3><button class="tm-close" onclick="closeTool('coldcall')">✕</button></div><div class="tm-body"><label>Topic</label><input type="text" id="coldcall-topic" placeholder="e.g. Photosynthesis"/><label>Year Group</label><input type="text" id="coldcall-year" placeholder="e.g. Year 10"/><button class="tm-submit" id="coldcall-btn" onclick="runTool('coldcall')">Generate questions</button><div class="tm-result" id="coldcall-result"></div></div></div></div>
+<div class="tool-modal" id="modal-exit"><div class="tm-inner"><div class="tm-header"><h3>Exit Ticket &amp; Whiteboard Prompts</h3><button class="tm-close" onclick="closeTool('exit')">✕</button></div><div class="tm-body"><label>Topic</label><input type="text" id="exit-topic" placeholder="e.g. The causes of World War I"/><label>Year Group</label><input type="text" id="exit-year" placeholder="e.g. Year 8"/><button class="tm-submit" id="exit-btn" onclick="runTool('exit')">Generate prompts</button><div class="tm-result" id="exit-result"></div></div></div></div>
+<div class="tool-modal" id="modal-send"><div class="tm-inner"><div class="tm-header"><h3>SEND Scaffold Builder</h3><button class="tm-close" onclick="closeTool('send')">✕</button></div><div class="tm-body"><label>Describe the task</label><textarea id="send-task" placeholder="e.g. Write a paragraph explaining why Henry VIII broke from the Church of Rome."></textarea><label>Year Group</label><input type="text" id="send-year" placeholder="e.g. Year 8"/><label>Specific needs (optional)</label><input type="text" id="send-needs" placeholder="e.g. EAL, dyslexia, working memory difficulties"/><button class="tm-submit" id="send-btn" onclick="runTool('send')">Build scaffolds</button><div class="tm-result" id="send-result"></div></div></div></div>
+
+<footer>
+  <div class="footer-logos">
+    <img src="nishkam-trust-logo.png" alt="Nishkam School Trust"/>
+    <img src="hep-logo.jpg" alt="Hounslow Education Partnership"/>
+  </div>
+  <div class="footer-text">
+    <div class="f-name">T&amp;L Excellence · Nishkam School West London</div>
+    <div class="f-motto">Man Neeva, Mat Uchi</div>
+    <div class="f-desc">Teaching &amp; Learning Excellence CPD resources.</div>
+    <div class="f-links"><a href="index.html">Home</a><a href="mlt-programme.html">Middle Leadership Programme</a></div>
+    <div class="f-copy">© Nishkam School West London</div>
+  </div>
+</footer>
+
+<script>
+const PW='virtues';
+function unlock(){const i=document.getElementById('pw'),e=document.getElementById('err'),g=document.getElementById('gate');if(i.value===PW){g.classList.add('hidden');sessionStorage.setItem('unlocked-tl','1');document.querySelector('.hamburger').style.display='flex';}else{e.style.display='block';i.value='';i.focus();}}
+if(sessionStorage.getItem('unlocked-tl')){document.getElementById('gate').classList.add('hidden');}
+const ham=document.getElementById('hamBtn'),drawer=document.getElementById('drawer'),ov=document.getElementById('overlay'),dc=document.getElementById('drawerClose');
+ham.addEventListener('click',()=>{drawer.classList.add('on');ov.classList.add('on');});dc.addEventListener('click',()=>{drawer.classList.remove('on');ov.classList.remove('on');});ov.addEventListener('click',()=>{drawer.classList.remove('on');ov.classList.remove('on');});drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{drawer.classList.remove('on');ov.classList.remove('on');}));
+if(!sessionStorage.getItem('unlocked-tl')){document.querySelector('.hamburger').style.display='none';}
+function openTool(id){document.getElementById('modal-'+id).classList.add('open');}
+function closeTool(id){document.getElementById('modal-'+id).classList.remove('open');}
+const PROMPTS={audit:(inp,subj)=>`You are an expert UK teaching and learning consultant. Audit this lesson plan against 8 strands: (1) Behaviour for Learning, (2) Explaining & Modelling, (3) Checking for Understanding, (4) Questioning, (5) Probing Questions, (6) SEND & Adaptive Teaching, (7) Embedding Practice, (8) Consistency. For each: rating (Strong/Developing/Missing) and one actionable improvement. Subject: ${subj}. Plan: ${inp}`,idwdyd:(t,y)=>`You are an expert UK teacher. Create a complete I Do, We Do, You Do sequence for "${t}" for ${y}. I DO: exact teacher script with modelled thinking. WE DO: guided practice with prompts. YOU DO: independent task with success criteria. Include misconceptions.`,coldcall:(t,y)=>`You are an expert UK teacher. Generate 15 cold-call questions for "${t}" for ${y}. RECALL (5), APPLICATION (5), PROBING (5 with 2 follow-up probes each).`,exit:(t,y)=>`You are an expert UK teacher. For "${t}" for ${y}: (1) 3 hinge questions with misconception analysis, (2) 4 whiteboard prompts, (3) 2 exit tickets, (4) 3 sentence starters.`,send:(task,y,needs)=>`You are a UK SENDCO. Task for ${y}: "${task}". ${needs?'Needs: '+needs+'.':''} Create 3 scaffolds: Light (sentence starters, checklist), Medium (chunked, visual, word bank), High (close-passage, step-by-step). Maintain high expectations.`};
+async function runTool(t){const b=document.getElementById(t+'-btn'),r=document.getElementById(t+'-result');b.disabled=true;b.textContent='Generating...';r.className='tm-result';r.textContent='';let p='';if(t==='audit')p=PROMPTS.audit(document.getElementById('audit-input').value,document.getElementById('audit-subject').value);else if(t==='idwdyd')p=PROMPTS.idwdyd(document.getElementById('idwdyd-topic').value,document.getElementById('idwdyd-year').value);else if(t==='coldcall')p=PROMPTS.coldcall(document.getElementById('coldcall-topic').value,document.getElementById('coldcall-year').value);else if(t==='exit')p=PROMPTS.exit(document.getElementById('exit-topic').value,document.getElementById('exit-year').value);else if(t==='send')p=PROMPTS.send(document.getElementById('send-task').value,document.getElementById('send-year').value,document.getElementById('send-needs')?.value||'');try{const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:p}]})});const d=await resp.json();r.textContent=d.content?.map(c=>c.text||'').join('\n')||'No response.';r.classList.add('show');}catch(e){r.textContent='Error: '+e.message;r.classList.add('show');}b.disabled=false;const labels={audit:'Audit my lesson',idwdyd:'Build sequence',coldcall:'Generate questions',exit:'Generate prompts',send:'Build scaffolds'};b.textContent=labels[t];}
+</script>
+</body>
+</html>
